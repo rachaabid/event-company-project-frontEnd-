@@ -1,0 +1,33 @@
+<div class="card container">
+  <div class="card-header">List Company</div>
+  <button type="button" class="btn btn-primary" routerLink="/AddCompany">Add Company</button>
+  <div class="card-body">
+    <table class="table table-bordered table-sm">
+      <thead>
+        <tr>
+          <th>Company No</th>
+          <th>Company Name</th>
+          <th>Company Description</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Photo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let company of listCompanys; let i=index">
+          <td>{{i+1}}</td>
+          <td>{{company.companyName}}</td>
+          <td>{{company.companyDescription}}</td>
+          <td>{{company.email}}</td>
+          <td>{{company.role}}</td>
+          <td>{{company.photo}}</td>
+          <td>
+            <button type="button" class="btn btn-success" routerLink="/UpdateCompany/{{i}}">Update</button>
+            <button type="button" class="btn btn-danger" (click)="deleteCompany(i)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

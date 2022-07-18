@@ -1,0 +1,47 @@
+<div class="card container">
+  <div class="card-header">List Event</div>
+  <button type="button" class="btn btn-primary" routerLink="/AddEvent">Add Event</button>
+  <div class="card-body">
+    <table class="table table-bordered table-sm">
+      <thead>
+        <tr>
+          <th>Event No</th>
+          <th>Event Name</th>
+          <th>Event Description</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Photo</th>
+          <th>Price</th>
+          <th>Available Ticket Number</th>
+          <th>Event Type</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of listEvents; let i=index">
+          <td>{{i+1}}</td>
+          <td>{{event.eventName}}</td>
+          <td>{{event.eventDescription}}</td>
+          <td>{{event.startDate}}</td>
+          <td>{{event.endDate}}</td>
+          <td>{{event.startTime}}</td>
+          <td>{{event.endTime}}</td>
+          <td>{{event.photo}}</td>
+          <td>{{event.price}}</td>
+          <td>{{event.availableTicketNumber}}</td>
+          <td>{{event. eventType}}</td>
+          <td>{{event.location}}</td>
+
+          <td>
+            <button type="button" class="btn btn-success" routerLink="/UpdateEvent/{{i}}">Update</button>
+            <button type="button" class="btn btn-danger" (click)="deleteEvent(i)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

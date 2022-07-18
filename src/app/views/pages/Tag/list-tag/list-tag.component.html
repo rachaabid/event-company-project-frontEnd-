@@ -1,0 +1,28 @@
+<div class="card container">
+  <div class="card-header">List Tag</div>
+  <button type="button" class="btn btn-primary" routerLink="/AddTag">Add Tag</button>
+  <div class="card-body">
+    <table class="table table-bordered table-sm">
+      <thead>
+        <tr>
+          <th>Tag No</th>
+          <th>Title Tag</th>
+          <th>Description Tag</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tag of listTags; let i=index">
+          <td>{{i+1}}</td>
+          <td>{{tag.title}}</td>
+          <td>{{tag.description}}</td>          
+          <td>
+            <button type="button" class="btn btn-success" routerLink="/UpdateTag/{{i}}">Update</button>
+            <button type="button" class="btn btn-danger" (click)="deleteTag(i)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+

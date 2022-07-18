@@ -6,6 +6,17 @@ import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
+import { ForgetPasswordComponent } from './views/pages/resetForgetPassword/forget-password/forget-password.component';
+import { ResetPasswordComponent } from './views/pages/resetForgetPassword/reset-password/reset-password.component';
+import { AddCompanyComponent } from './views/pages/company/add-company/add-company.component';
+import { UpdateCompanyComponent } from './views/pages/company/update-company/update-company.component';
+import { ListCompanyComponent } from './views/pages/company/list-company/list-company.component';
+import { AddEventComponent } from './views/pages/Event/add-event/add-event.component';
+import { ListEventComponent } from './views/pages/Event/list-event/list-event.component';
+import { UpdateEventComponent } from './views/pages/Event/update-event/update-event.component';
+import { AddTagComponent } from './views/pages/Tag/add-tag/add-tag.component';
+import { UpdateTagComponent } from './views/pages/Tag/update-tag/update-tag.component';
+import { ListTagComponent } from './views/pages/Tag/list-tag/list-tag.component';
 
 const routes: Routes = [
   {
@@ -100,6 +111,39 @@ const routes: Routes = [
       title: 'Register Page'
     }
   },
+  {
+    path: 'forget', component: ForgetPasswordComponent
+  },
+  {
+    path: 'reset', component: ResetPasswordComponent
+  },
+  {
+   path: 'AddCompany', component: AddCompanyComponent
+  },
+  {
+   path: 'UpdateCompany/:id', component: UpdateCompanyComponent
+  },
+  {
+   path: 'ListCompany', component: ListCompanyComponent
+  },
+  {
+    path: 'AddEvent', component: AddEventComponent
+   },
+   {
+    path: 'UpdateEvent/:id', component: UpdateEventComponent
+   },
+   {
+    path: 'ListEvent', component: ListEventComponent
+   },
+   {
+    path: 'AddTag', component: AddTagComponent
+   },
+   {
+    path: 'UpdateTag/:id', component: UpdateTagComponent
+   },
+   {
+    path: 'ListTag', component: ListTagComponent
+   },
   {path: '**', redirectTo: 'dashboard'}
 ];
 

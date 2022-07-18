@@ -1,41 +1,46 @@
-<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
-  <c-container>
-    <c-row class="justify-content-center">
-      <c-col lg="7" md="9" xl="6">
-        <c-card class="mx-4">
-          <c-card-body class="p-4">
-            <form cForm>
-              <h1>Register</h1>
-              <p class="text-medium-emphasis">Create your account</p>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>
-                  <svg cIcon name="cilUser"></svg>
-                </span>
-                <input autoComplete="name" cFormControl placeholder="Username" />
-              </c-input-group>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>@</span>
-                <input autoComplete="email" cFormControl placeholder="Email" />
-              </c-input-group>
-              <c-input-group class="mb-3">
-                <span cInputGroupText>
-                  <svg cIcon name="cilLockLocked"></svg>
-                </span>
-                <input autoComplete="new-password" cFormControl placeholder="Password" type="password" />
-              </c-input-group>
-              <c-input-group class="mb-4">
-                <span cInputGroupText>
-                  <svg cIcon name="cilLockLocked"></svg>
-                </span>
-                <input autoComplete="new-password" cFormControl placeholder="Repeat password" type="password" />
-              </c-input-group>
-              <div class="d-grid">
-                <button cButton color="success">Create Account</button>
-              </div>
-            </form>
-          </c-card-body>
-        </c-card>
-      </c-col>
-    </c-row>
-  </c-container>
+<div class="card bg-light min-vh-75 d-flex flex-row col-8 align-items-center container mt-5">
+  <h1 class="mx-5" style="font-weight: 900;">Create an account</h1>
+  <form class="row p-4" *ngIf="companyForm" [formGroup]="companyForm" (ngSubmit)="register()">
+    <div class="form-group mb-2">
+      <label for="companyName">Company Name:</label>
+      <input type="text" class="form-control" formControlName="companyName" placeholder="Company Name"
+        [ngClass]="{'is-invalid': submitted && companyForm.get('companyName')?.errors, 'is-valid': submitted && !companyForm.get('companyName')?.errors}">
+      <div class="d-block invalid-feedback" *ngIf="submitted && companyForm.get('companyName')?.errors?.['required']">
+        Company Name is required
+      </div>
+    </div>
+
+    <div class="form-group mb-2">
+      <label for="descriptionName">Description Name:</label>
+      <input type="text" class="form-control" formControlName="descriptionName" placeholder="Description Name"
+        [ngClass]="{'is-invalid': submitted && companyForm.get('descriptionName')?.errors, 'is-valid': submitted && !companyForm.get('descriptionName')?.errors}">
+      <div class="d-block invalid-feedback"
+        *ngIf="submitted && companyForm.get('descriptionName')?.errors?.['required']">
+        Description Name is required
+      </div> 
+    </div>
+
+    <div class="form-group mb-2">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" formControlName="email" placeholder="Email"
+        [ngClass]="{'is-invalid': submitted && companyForm.get('email')?.errors, 'is-valid': submitted && !companyForm.get('email')?.errors}">
+      <div class="d-block invalid-feedback" *ngIf="submitted && companyForm.get('email')?.errors?.['required']">
+        Email is required
+      </div>
+      <div class="d-block invalid-feedback" *ngIf="submitted && companyForm.get('email')?.errors?.['email']">
+        Email is invalid
+      </div> 
+    </div>
+
+    <div class="form-group mb-2">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" formControlName="password" placeholder="Password"
+         [ngClass]="{'is-invalid': submitted && companyForm.get('password')?.errors, 'is-valid': submitted && !companyForm.get('password')?.errors}">
+      <div class="d-block invalid-feedback" *ngIf="submitted && companyForm.get('password')?.errors?.['required']">
+        Password is required
+      </div> 
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Register</button>
+  </form>
 </div>
