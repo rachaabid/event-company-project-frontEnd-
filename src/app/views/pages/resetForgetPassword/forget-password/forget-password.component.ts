@@ -11,27 +11,33 @@ import {ForgetPasswordService} from '../services/forget-password.service';
 })
 export class ForgetPasswordComponent implements OnInit {
 email: any = '';
-companyForm?: FormGroup;
+forgetForm?: FormGroup;
+logForm?: FormGroup;
 submitted = false;
   constructor(private forgetService: ForgetPasswordService, private route: Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
-    this.companyForm = new FormGroup ({
+    this.logForm =new FormGroup ({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required),
+      password :  new FormControl('', Validators.required)
+  }) 
+    this.forgetForm = new FormGroup ({
+      email: new FormControl('', [Validators.required, Validators.email]),
   })
   }
 
   forgetPassword(){
-    this.forgetService.forget(this.email).subscribe(data=>this.email = data);
+    this.forgetService.forget(this.forgetForm?.value).subscribe(response=>{
+      console.log(response);
+    });
   }
 
   login(){
     this.submitted=true;
-    if (this.companyForm?.invalid){
+    if (this.forgetForm?.invalid){
       return
     }
-    this.loginService.signIn(this.companyForm?.value);
+    this.loginService.signIn(this.forgetForm?.value);
     this.route.navigate(['/dashboard']);
   }
 

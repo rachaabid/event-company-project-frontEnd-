@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ResetPasswordService {
-  baseURL='localhost:3000/api/v1/';
+  baseURL='http://localhost:3000/api/v1/';
+
   constructor(private http: HttpClient) { }
 
   reset(resetToken: any, data: any){

@@ -1,0 +1,114 @@
+<div class="container  mt-3">
+  <h3>List Tags</h3>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalAdd">Add
+    Tag</button><br>
+
+  <table class="table table-bordered table-sm">
+    <thead>
+      <tr>
+        <th>Tag No</th>
+        <th>Title Tag</th>
+        <th>Description Tag</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tag of listTags; let i=index">
+        <td>{{i+1}}</td>
+        <td>{{tag.title}}</td>
+        <td>{{tag.description}}</td> 
+
+        <td>
+          <button type="button" class="btn btn-success" data-bs-toggle="modal"
+            data-bs-target="#ModalUpd" (click)="showTagData(tag._id)">Update</button>
+          <button type="button" class="btn btn-danger" (click)="deleteTag(tag._id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="modal" id="ModalAdd">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Tag </h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <form *ngIf="tagForm" [formGroup]="tagForm" (ngSubmit)="addTag()">
+            <div class="form-group mb-2">
+              <label for="title">Title:</label>
+              <input type="text" class="form-control" formControlName="title" placeholder="Title"
+                [ngClass]="{'is-invalid': submitted && tagForm.get('title')?.errors, 'is-valid': submitted && !tagForm.get('title')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && tagForm.get('title')?.errors?.['required']">
+                Title is required
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="description">Description:</label>
+              <input type="text" class="form-control" formControlName="description" placeholder="Description"
+                [ngClass]="{'is-invalid': submitted && tagForm.get('description')?.errors, 'is-valid': submitted && !tagForm.get('description')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && tagForm.get('description')?.errors?.['required']">
+                Description is required
+              </div>
+            </div>
+             
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+    
+              <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="ModalUpd">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Update Tag </h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <form *ngIf="tagForm" [formGroup]="tagForm" (ngSubmit)="saveChanges()">
+            <div class="form-group mb-2">
+              <label for="title">Title:</label>
+              <input type="text" class="form-control" formControlName="title" placeholder="Title"
+                [ngClass]="{'is-invalid': submitted && tagForm.get('title')?.errors, 'is-valid': submitted && !tagForm.get('title')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && tagForm.get('title')?.errors?.['required']">
+                Title is required
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="description">Description:</label>
+              <input type="text" class="form-control" formControlName="description" placeholder="Description"
+                [ngClass]="{'is-invalid': submitted && tagForm.get('description')?.errors, 'is-valid': submitted && !tagForm.get('description')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && tagForm.get('description')?.errors?.['required']">
+                Description is required
+              </div>
+            </div>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+    
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+

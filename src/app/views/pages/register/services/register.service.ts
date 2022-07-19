@@ -5,7 +5,8 @@ import { HttpClient } from '@angular/common/http'
   providedIn: 'root'
 })
 export class RegisterService {
- baseURL='localhost:3000/api/v1/';
+  baseURL='http://localhost:3000/api/v1/';
+  
   constructor(private http: HttpClient) { }
 
   signup(data: any){

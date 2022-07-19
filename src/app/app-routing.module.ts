@@ -8,15 +8,6 @@ import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
 import { ForgetPasswordComponent } from './views/pages/resetForgetPassword/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './views/pages/resetForgetPassword/reset-password/reset-password.component';
-import { AddCompanyComponent } from './views/pages/company/add-company/add-company.component';
-import { UpdateCompanyComponent } from './views/pages/company/update-company/update-company.component';
-import { ListCompanyComponent } from './views/pages/company/list-company/list-company.component';
-import { AddEventComponent } from './views/pages/Event/add-event/add-event.component';
-import { ListEventComponent } from './views/pages/Event/list-event/list-event.component';
-import { UpdateEventComponent } from './views/pages/Event/update-event/update-event.component';
-import { AddTagComponent } from './views/pages/Tag/add-tag/add-tag.component';
-import { UpdateTagComponent } from './views/pages/Tag/update-tag/update-tag.component';
-import { ListTagComponent } from './views/pages/Tag/list-tag/list-tag.component';
 
 const routes: Routes = [
   {
@@ -74,13 +65,25 @@ const routes: Routes = [
       {
         path: 'widgets',
         loadChildren: () =>
-          import('./views/widgets/widgets.module').then((m) => m.WidgetsModule)
+        import('./views/widgets/widgets.module').then((m) => m.WidgetsModule)
       },
       {
         path: 'pages',
         loadChildren: () =>
-          import('./views/pages/pages.module').then((m) => m.PagesModule)
+        import('./views/pages/pages.module').then((m) => m.PagesModule)
       },
+      { path: 'company', 
+      loadChildren: () => 
+      import('./views/company/company.module').then(m => m.CompanyModule) 
+    },
+      { path: 'event', 
+      loadChildren: () => 
+      import('./views/event/event.module').then(m => m.EventModule)
+     },
+  { path: 'tag', 
+  loadChildren: () => 
+  import('./views/tag/tag.module').then(m => m.TagModule) 
+},
     ]
   },
   {
@@ -115,35 +118,8 @@ const routes: Routes = [
     path: 'forget', component: ForgetPasswordComponent
   },
   {
-    path: 'reset', component: ResetPasswordComponent
-  },
-  {
-   path: 'AddCompany', component: AddCompanyComponent
-  },
-  {
-   path: 'UpdateCompany/:id', component: UpdateCompanyComponent
-  },
-  {
-   path: 'ListCompany', component: ListCompanyComponent
-  },
-  {
-    path: 'AddEvent', component: AddEventComponent
-   },
-   {
-    path: 'UpdateEvent/:id', component: UpdateEventComponent
-   },
-   {
-    path: 'ListEvent', component: ListEventComponent
-   },
-   {
-    path: 'AddTag', component: AddTagComponent
-   },
-   {
-    path: 'UpdateTag/:id', component: UpdateTagComponent
-   },
-   {
-    path: 'ListTag', component: ListTagComponent
-   },
+    path: 'resetPassword/:resetToken', component: ResetPasswordComponent
+  }, 
   {path: '**', redirectTo: 'dashboard'}
 ];
 

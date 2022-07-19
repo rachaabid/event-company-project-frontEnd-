@@ -1,0 +1,275 @@
+<div class="container  mt-3">
+  <h1>List Events</h1>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalAdd">Add
+    Event</button><br>
+
+  <table class="table table-bordered table-sm">
+    <thead>
+      <tr>
+        <th>Event No</th>
+        <th>Event Name</th>
+        <th>Start Date</th>
+        <th>Start Time</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of listEvents; let i=index">
+        <td>{{i+1}}</td>
+        <td>{{event.eventName}}</td>
+        <td>{{event.startDate}}</td>
+        <td>{{event.startTime}}</td>
+        <td>{{event.location}}</td>
+
+        <td>
+          <button type="button" class="btn btn-success" data-bs-toggle="modal"
+            data-bs-target="#ModalUpd" (click)="showEventData(event._id)">Update</button>
+          <button type="button" class="btn btn-danger" (click)="deleteEvent(event._id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="modal" id="ModalAdd">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add Event </h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <form *ngIf="eventForm" [formGroup]="eventForm" (ngSubmit)="addEvent()">
+            <div class="form-group mb-2">
+              <label for="eventName">Event Name:</label>
+              <input type="text" class="form-control" formControlName="eventName" placeholder="Event Name"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('eventName')?.errors, 'is-valid': submitted && !eventForm.get('eventName')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('eventName')?.errors?.['required']">
+                Event Name is required
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="eventDescription">Event Description:</label>
+              <input type="text" class="form-control" formControlName="eventDescription" placeholder="Event Description"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('eventDescription')?.errors, 'is-valid': submitted && !eventForm.get('eventDescription')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('eventDescription')?.errors?.['required']">
+                Event Description is required
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="startDate">Start Date:</label>
+              <input type="date" class="form-control" formControlName="startDate" placeholder="Start Date"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('startDate')?.errors, 'is-valid': submitted && !eventForm.get('startDate')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('startDate')?.errors?.['required']">
+                Start Date is required
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="endDate">End Date:</label>
+              <input type="date" class="form-control" formControlName="endDate" placeholder="End Date"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('endDate')?.errors, 'is-valid': submitted && !eventForm.get('endDate')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('endDate')?.errors?.['required']">
+                End Date is required
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="startTime">Start Time:</label>
+              <input type="time" class="form-control" formControlName="startTime" placeholder="Start Time"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('startTime')?.errors, 'is-valid': submitted && !eventForm.get('startTime')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('startTime')?.errors?.['required']">
+                Start Time is required
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="endTime">endTime:</label>
+              <input type="time" class="form-control" formControlName="endTime" placeholder="End Time"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('endTime')?.errors, 'is-valid': submitted && !eventForm.get('endTime')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('endTime')?.errors?.['required']">
+                End Time is required
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="photo">Photo:</label>
+              <input type="file" formControlName="photo">    
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="price">Price:</label>
+              <input type="text" class="form-control" formControlName="price" placeholder="Price"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('price')?.errors, 'is-valid': submitted && !eventForm.get('price')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('price')?.errors?.['required']">
+                Price is required
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="availableTicketNumber">Available Ticket Number:</label>
+              <input type="number" class="form-control" minlength="0" formControlName="availableTicketNumber" placeholder="Available Ticket Number"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('availableTicketNumber')?.errors, 'is-valid': submitted && !eventForm.get('availableTicketNumber')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('availableTicketNumber')?.errors?.['required']">
+                Available Ticket Number is required
+              </div>
+
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('availableTicketNumber')?.errors?.['minlength']">
+               
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="eventType">Event Type:</label>
+              <input type="text" class="form-control" formControlName="eventType" placeholder="Event Type"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('eventType')?.errors, 'is-valid': submitted && !eventForm.get('eventType')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('eventType')?.errors?.['required']">
+                Event Type is required
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="location">Location:</label>
+              <input type="text" class="form-control" formControlName="location" placeholder="Location"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('location')?.errors, 'is-valid': submitted && !eventForm.get('location')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('location')?.errors?.['required']">
+                Location is required
+              </div>
+            </div>
+      
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+    
+              <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="ModalUpd">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Update Event </h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <form *ngIf="eventForm" [formGroup]="eventForm" (ngSubmit)="saveChanges()">
+            <div class="form-group mb-2">
+              <label for="eventName">Event Name:</label>
+              <input type="text" class="form-control" formControlName="eventName" placeholder="Event Name"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('eventName')?.errors, 'is-valid': submitted && !eventForm.get('eventName')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('eventName')?.errors?.['required']">
+                Event Name is required
+              </div>
+            </div>
+
+            <div class="form-group mb-2">
+              <label for="eventDescription">Event Description:</label>
+              <input type="text" class="form-control" formControlName="eventDescription" placeholder="Event Description"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('eventDescription')?.errors, 'is-valid': submitted && !eventForm.get('eventDescription')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('eventDescription')?.errors?.['required']">
+                Event Description is required
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="startDate">Start Date:</label>
+              <input type="date" class="form-control" formControlName="startDate" placeholder="Start Date"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('startDate')?.errors, 'is-valid': submitted && !eventForm.get('startDate')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('startDate')?.errors?.['required']">
+                Start Date is required
+              </div>
+            </div>
+
+            <div class="form-group mb-2">
+              <label for="endDate">End Date:</label>
+              <input type="date" class="form-control" formControlName="endDate" placeholder="End Date"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('endDate')?.errors, 'is-valid': submitted && !eventForm.get('endDate')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('endDate')?.errors?.['required']">
+                End Date is required
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="startTime">Start Time:</label>
+              <input type="time" class="form-control" formControlName="startTime" placeholder="Start Time"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('startTime')?.errors, 'is-valid': submitted && !eventForm.get('startTime')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('startTime')?.errors?.['required']">
+                Start Time is required
+              </div>
+            </div>
+
+            <div class="form-group mb-2">
+              <label for="endTime">endTime:</label>
+              <input type="time" class="form-control" formControlName="endTime" placeholder="End Time"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('endTime')?.errors, 'is-valid': submitted && !eventForm.get('endTime')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('endTime')?.errors?.['required']">
+                End Time is required
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="photo">Photo:</label>
+              <input type="file" formControlName="photo">    
+            </div>
+
+            <div class="form-group mb-2">
+              <label for="price">Price:</label>
+              <input type="text" class="form-control" formControlName="price" placeholder="Price"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('price')?.errors, 'is-valid': submitted && !eventForm.get('price')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('price')?.errors?.['required']">
+                Price is required
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="availableTicketNumber">Available Ticket Number:</label>
+              <input type="number" class="form-control" formControlName="availableTicketNumber" placeholder="Available Ticket Number"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('availableTicketNumber')?.errors, 'is-valid': submitted && !eventForm.get('availableTicketNumber')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('availableTicketNumber')?.errors?.['required']">
+                Available Ticket Number is required
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="eventType">Event Type:</label>
+              <input type="text" class="form-control" formControlName="eventType" placeholder="Event Type"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('eventType')?.errors, 'is-valid': submitted && !eventForm.get('eventType')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('eventType')?.errors?.['required']">
+                Event Type is required
+              </div>
+            </div>
+      
+            <div class="form-group mb-2">
+              <label for="location">Location:</label>
+              <input type="text" class="form-control" formControlName="location" placeholder="Location"
+                [ngClass]="{'is-invalid': submitted && eventForm.get('location')?.errors, 'is-valid': submitted && !eventForm.get('location')?.errors}">
+              <div class="d-block invalid-feedback" *ngIf="submitted && eventForm.get('location')?.errors?.['required']">
+                Location is required
+              </div>
+            </div>
+      
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+    
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
