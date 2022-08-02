@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { LoginService } from '../../login/services/login.service';
 import {ForgetPasswordService} from '../services/forget-password.service';
 
@@ -14,7 +15,7 @@ email: any = '';
 forgetForm?: FormGroup;
 logForm?: FormGroup;
 submitted = false;
-  constructor(private forgetService: ForgetPasswordService, private route: Router, private loginService: LoginService) { }
+  constructor(private forgetService: ForgetPasswordService, private route: Router, private loginService: LoginService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.logForm =new FormGroup ({
@@ -29,6 +30,9 @@ submitted = false;
   forgetPassword(){
     this.forgetService.forget(this.forgetForm?.value).subscribe(response=>{
       console.log(response);
+      this.toastr.info('Email sent', 'Hello');
+    }, error=>{
+    console.log(error)
     });
   }
 
@@ -37,8 +41,13 @@ submitted = false;
     if (this.forgetForm?.invalid){
       return
     }
-    this.loginService.signIn(this.forgetForm?.value);
-    this.route.navigate(['/dashboard']);
+    this.loginService.signIn(this.logForm?.value).subscribe(response=>{
+      console.log(response); 
+      this.toastr.success('Welcome to dashboard', 'Hello')
+      this.route.navigate(['/dashboard']);
+    }, error=>{
+      console.log(error)
+    })
   }
 
 }

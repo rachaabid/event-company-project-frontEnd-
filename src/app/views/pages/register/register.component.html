@@ -11,12 +11,12 @@
     </div>
 
     <div class="form-group mb-2">
-      <label for="descriptionName">Description Name:</label>
-      <input type="text" class="form-control" formControlName="descriptionName" placeholder="Description Name"
-        [ngClass]="{'is-invalid': submitted && companyForm.get('descriptionName')?.errors, 'is-valid': submitted && !companyForm.get('descriptionName')?.errors}">
+      <label for="companyDescription">Company Description:</label>
+      <input type="text" class="form-control" formControlName="companyDescription" placeholder="Company Description"
+        [ngClass]="{'is-invalid': submitted && companyForm.get('companyDescription')?.errors, 'is-valid': submitted && !companyForm.get('companyDescription')?.errors}">
       <div class="d-block invalid-feedback"
-        *ngIf="submitted && companyForm.get('descriptionName')?.errors?.['required']">
-        Description Name is required
+        *ngIf="submitted && companyForm.get('companyDescription')?.errors?.['required']">
+       Company Description is required
       </div> 
     </div>
 

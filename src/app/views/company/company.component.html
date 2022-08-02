@@ -23,8 +23,8 @@
         <td>{{company.role}}</td>
         <td>{{company.photo}}</td>
         <td>
-          <button type="button" class="btn btn-success" data-bs-toggle="modal"
-            data-bs-target="#ModalUpd" (click)="showCompanyData(company._id)">Update</button>
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalUpd"
+            (click)="showCompanyData(company._id)">Update</button>
           <button type="button" class="btn btn-danger" (click)="deleteCompany(company._id)">Delete</button>
         </td>
       </tr>
@@ -54,7 +54,8 @@
 
             <div class="form-group mb-2">
               <label for="descriptionName">Description Name:</label>
-              <input type="text" class="form-control" formControlName="companyDescription" placeholder="Description Name"
+              <input type="text" class="form-control" formControlName="companyDescription"
+                placeholder="Description Name"
                 [ngClass]="{'is-invalid': submitted && companyForm.get('companyDescription')?.errors, 'is-valid': submitted && !companyForm.get('companyDescription')?.errors}">
               <div class="d-block invalid-feedback"
                 *ngIf="submitted && companyForm.get('companyDescription')?.errors?.['required']">
@@ -95,18 +96,20 @@
 
             <div class="form-group mb-2">
               <label for="photo">Photo:</label>
-              <input type="file" formControlName="photo">
+              <input type="file" (change)="selectImage($event)" accept="image/*">  
             </div>
+            <img *ngIf="companyForm.value.photo" [src]="companyForm.value.photo" style="height: 50px; width:50px">
+
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-    
+
               <button type="submit" class="btn btn-primary">Add</button>
             </div>
           </form>
 
         </div>
 
-       
+
       </div>
     </div>
   </div>
@@ -134,7 +137,8 @@
 
             <div class="form-group mb-2">
               <label for="descriptionName">Description Name:</label>
-              <input type="text" class="form-control" formControlName="companyDescription" placeholder="Description Name"
+              <input type="text" class="form-control" formControlName="companyDescription"
+                placeholder="Description Name"
                 [ngClass]="{'is-invalid': submitted && companyForm.get('companyDescription')?.errors, 'is-valid': submitted && !companyForm.get('companyDescription')?.errors}">
               <div class="d-block invalid-feedback"
                 *ngIf="submitted && companyForm.get('companyDescription')?.errors?.['required']">
@@ -175,12 +179,12 @@
 
             <div class="form-group mb-2">
               <label for="photo">Photo:</label>
-              <input type="file"  formControlName="photo" >
-            
+              <input type="file" (change)="selectImage($event)" accept="image/*">
+              <img *ngIf="companyForm.value.photo" [src]="companyForm.value.photo" style="height: 50px; width:50px">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-    
+
               <button type="submit" class="btn btn-primary">Save Changes</button>
             </div>
           </form>

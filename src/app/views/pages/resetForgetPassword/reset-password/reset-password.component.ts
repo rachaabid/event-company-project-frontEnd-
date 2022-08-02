@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import {ResetPasswordService} from '../services/reset-password.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class ResetPasswordComponent implements OnInit {
  submitted = false;
  token: any;
  message: any;
-  constructor(private resetService: ResetPasswordService) { }
+  constructor(private resetService: ResetPasswordService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.resetForm = new FormGroup ({
@@ -26,7 +27,11 @@ export class ResetPasswordComponent implements OnInit {
     if (this.resetForm?.invalid){
       return
     }
-    this.resetService.reset(this.token, this.resetForm?.value).subscribe(data=>this.message == data);
+    this.resetService.reset(this.token, this.resetForm?.value).subscribe(response=>{
+      this.toastr.info('Your password has been reset', 'Reset password')
+    }, error=>{
+     console.log(error);
+    });
   }
 
 }

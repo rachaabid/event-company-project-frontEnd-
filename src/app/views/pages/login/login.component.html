@@ -2,22 +2,22 @@
   <div class="card-body p-5">
    <h1 class="card-title ms-3">Login</h1>
    <p class="text-medium-emphasis ms-3">Sign In to your account</p>
-   <form class="row p-4" *ngIf="companyForm" [formGroup]="companyForm" (ngSubmit)="login()">
+   <form class="row p-4" *ngIf="logForm" [formGroup]="logForm" (ngSubmit)="login()">
     <div class="form-group mb-2">
       <input type="email" class="form-control" formControlName="email" placeholder="Email"
-        [ngClass]="{'is-invalid': submitted && companyForm.get('email')?.errors, 'is-valid': submitted && !companyForm.get('email')?.errors}">
-      <div class="d-block invalid-feedback" *ngIf="submitted && companyForm.get('email')?.errors?.['required']">
+        [ngClass]="{'is-invalid': submitted && logForm.get('email')?.errors, 'is-valid': submitted && !logForm.get('email')?.errors}">
+      <div class="d-block invalid-feedback" *ngIf="submitted && logForm.get('email')?.errors?.['required']">
         Email is required
       </div>
-      <div class="d-block invalid-feedback" *ngIf="submitted && companyForm.get('email')?.errors?.['email']">
+      <div class="d-block invalid-feedback" *ngIf="submitted && logForm.get('email')?.errors?.['email']">
         Email is invalid
       </div> 
     </div>
 
     <div class="form-group mb-2">
       <input type="password" class="form-control" formControlName="password" placeholder="Password"
-         [ngClass]="{'is-invalid': submitted && companyForm.get('password')?.errors, 'is-valid': submitted && !companyForm.get('password')?.errors}">
-      <div class="d-block invalid-feedback" *ngIf="submitted && companyForm.get('password')?.errors?.['required']">
+         [ngClass]="{'is-invalid': submitted && logForm.get('password')?.errors, 'is-valid': submitted && !logForm.get('password')?.errors}">
+      <div class="d-block invalid-feedback" *ngIf="submitted && logForm.get('password')?.errors?.['required']">
         Password is required
       </div> 
     </div>

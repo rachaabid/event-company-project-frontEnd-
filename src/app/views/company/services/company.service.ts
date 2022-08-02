@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {  Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +7,8 @@ import { Injectable } from '@angular/core';
 export class CompanyService {
 
   baseURL='http://localhost:3000/api/v1/';
+
+  
   constructor(private http: HttpClient) { }
 
   createCompany(company: any){
@@ -27,5 +29,14 @@ export class CompanyService {
 
  saveUpdate(companyId: any, data: any){
   return this.http.put(`${this.baseURL}Companies/${companyId}`, data);
+ }
+
+ uploadImage(formdata: any){
+  this.http.post(`${this.baseURL}file-company`, formdata).subscribe((data: any)=>{
+    console.log(data);
+  },
+  (error: any)=>{
+    console.log(error);
+  });
  }
 }

@@ -8,6 +8,7 @@ import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
 import { ForgetPasswordComponent } from './views/pages/resetForgetPassword/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './views/pages/resetForgetPassword/reset-password/reset-password.component';
+ import {AuthGuard} from './guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: DefaultLayoutComponent,
+    component: DefaultLayoutComponent, canActivate: [AuthGuard],
     data: {
       title: 'Home'
     },
@@ -74,15 +75,18 @@ const routes: Routes = [
       },
       { path: 'company', 
       loadChildren: () => 
-      import('./views/company/company.module').then(m => m.CompanyModule) 
+      import('./views/company/company.module').then(m => m.CompanyModule), 
+       
     },
       { path: 'event', 
       loadChildren: () => 
-      import('./views/event/event.module').then(m => m.EventModule)
+      import('./views/event/event.module').then(m => m.EventModule), 
+       
      },
   { path: 'tag', 
   loadChildren: () => 
-  import('./views/tag/tag.module').then(m => m.TagModule) 
+  import('./views/tag/tag.module').then(m => m.TagModule), 
+   
 },
     ]
   },
@@ -118,7 +122,7 @@ const routes: Routes = [
     path: 'forget', component: ForgetPasswordComponent
   },
   {
-    path: 'resetPassword/:resetToken', component: ResetPasswordComponent
+    path: 'resetPassword/:resetToken/:id', component: ResetPasswordComponent
   }, 
   {path: '**', redirectTo: 'dashboard'}
 ];

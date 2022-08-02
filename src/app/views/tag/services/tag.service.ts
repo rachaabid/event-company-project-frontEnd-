@@ -14,7 +14,7 @@ export class TagService {
   }
 
   getTags(){
-    return this.http.get(`${this.baseURL}Tags/`);
+    return this.http.get(`${this.baseURL}Tags`);
   }
 
  getTagById(idTag: any){

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { TagService } from './services/tag.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class TagComponent implements OnInit {
   submitted = false;
   listTags: any;
   id: any;
-  constructor(private tagService: TagService) { }
+  constructor(private tagService: TagService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loadTags();
@@ -31,16 +32,23 @@ export class TagComponent implements OnInit {
     if (this.tagForm?.invalid){
       return
     }
-    this.tagService.createTag(this.tagForm?.value).subscribe(data => location.reload())
+    this.tagService.createTag(this.tagForm?.value).subscribe(data => {location.reload();
+      this.toastr.success('Event created', 'Good')},
+      (error)=>{
+        console.log(error)
+      })
   }
 
   deleteTag(i: any){
-    this.tagService.removeTag(i).subscribe(data=>{this.ngOnInit();})
+    this.tagService.removeTag(i).subscribe(data=>{this.ngOnInit();
+      this.toastr.info('data deleted', 'Tag')})
   }
 
   showTagData(id: any){
     this.id=id;
-    this.tagService.getTagById(id).subscribe(data=>{this.tagForm?.patchValue(data);})
+    this.tagService.getTagById(id).subscribe(data=>{this.tagForm?.patchValue(data);
+      this.toastr.info('here is your data', 'To modify')
+    })
    }
  
    saveChanges(){
@@ -49,8 +57,8 @@ export class TagComponent implements OnInit {
        return
      }
      this.tagService.saveUpdate(this.id, this.tagForm?.value).subscribe(data=>location.reload(), 
-     (error)=>{
-      console.log(error)})
+      (error)=>{
+        console.log(error)})
    }
 
 }

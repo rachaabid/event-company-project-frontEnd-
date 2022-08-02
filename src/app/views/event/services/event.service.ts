@@ -13,7 +13,12 @@ export class EventService {
   }
 
   getEvents(){
-    return this.http.get(`${this.baseURL}Events/`);
+    return this.http.get(`${this.baseURL}Events`);
+  }
+
+  getTags()
+  {
+   return this.http.get(`${this.baseURL}listTags`)
   }
 
  getEventById(idEvent: any){

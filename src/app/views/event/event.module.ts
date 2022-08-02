@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EventRoutingModule } from './event-routing.module';
 import { EventComponent } from './event.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SelectModule } from 'ng-select';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     EventRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SelectModule
   ]
 })
 export class EventModule { }
