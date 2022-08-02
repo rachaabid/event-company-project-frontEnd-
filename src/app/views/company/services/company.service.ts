@@ -31,12 +31,5 @@ export class CompanyService {
   return this.http.put(`${this.baseURL}Companies/${companyId}`, data);
  }
 
- uploadImage(formdata: any){
-  this.http.post(`${this.baseURL}file-company`, formdata).subscribe((data: any)=>{
-    console.log(data);
-  },
-  (error: any)=>{
-    console.log(error);
-  });
- }
+ 
 }
