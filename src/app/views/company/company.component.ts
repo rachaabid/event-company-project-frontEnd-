@@ -14,7 +14,6 @@ export class CompanyComponent implements OnInit {
   submitted = false;
   listCompanies: any;
   id: any;
-  imageSrc: any;
   fileSelected: any;
   constructor(private companyService: CompanyService,
     private route: Router, private toastr: ToastrService, private changeDetector: ChangeDetectorRef) { }

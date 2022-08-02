@@ -101,7 +101,9 @@
 
             <div class="form-group mb-2">
               <label for="photo">Photo:</label>
-              <input type="file" formControlName="photo">
+              <input type="file" (change)="selectImage($event)" accept="image/*">
+              <img *ngIf="eventForm.value.photo" [src]="eventForm.value.photo" style="height: 50px; width:50px">
+
             </div>
 
             <div class="form-group mb-2">
@@ -239,7 +241,8 @@
 
             <div class="form-group mb-2">
               <label for="photo">Photo:</label>
-              <input type="file" formControlName="photo">
+              <input type="file" (change)="selectImage($event)" accept="image/*">
+              <img *ngIf="eventForm.value.photo" [src]="eventForm.value.photo" style="height: 50px; width:50px">
             </div>
 
             <div class="form-group mb-2">

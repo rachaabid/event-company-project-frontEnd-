@@ -15,6 +15,7 @@ export class EventComponent implements OnInit {
   eventForm?: FormGroup;
   submitted = false;
   id: any;
+  fileSelected: any;
   listTags:Array<IOption> =[]
   constructor(private eventService: EventService, private toastr: ToastrService) {
   
@@ -48,6 +49,16 @@ export class EventComponent implements OnInit {
     this.eventService.getTags().subscribe((data:any)=>{this.listTags=data,
     console.log(data)})
     
+  }
+
+  selectImage(event: any) {
+    this.fileSelected = event.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(this.fileSelected);
+    reader.onloadend = () => {
+      const base64String = (<string>reader.result).replace("data:", "").replace(/^.+,/, "");
+      this.eventForm?.controls['photo'].setValue("data:image/jpeg;base64," + base64String.toString())
+    }
   }
   
 
