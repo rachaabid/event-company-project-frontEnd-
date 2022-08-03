@@ -18,11 +18,12 @@ export class AuthGuard implements CanActivate {
       if (token !== null) {
        let isExpired: any = this.isExpiredToken(token);
         if (isExpired) {
-          this.route.navigate(['/login'])
-          return false
+          return true
         }
         else {
-          return true
+          this.route.navigate(['/login'])
+          alert('your token expired')
+          return false
         }
        }
        else {
@@ -33,13 +34,14 @@ export class AuthGuard implements CanActivate {
      }
      isExpiredToken(token: string): boolean{
        
-       let decodedToken: any = jwt_decode(token);
-       const expireDate = new Date();
-       expireDate.setUTCDate(decodedToken.exp);
+      //  let decodedToken: any = jwt_decode(token);
+      //  const expireDate = new Date();
+      //  expireDate.setUTCDate(decodedToken.exp);
+      const expireDate = (JSON.parse(atob(token.split('.')[1]))).exp;
        console.log(expireDate.valueOf())
-       const curentDate = new Date()
+       const curentDate = Math.floor(Date.now()/1000);
        console.log(curentDate.valueOf())
-       return decodedToken.exp>curentDate
+       return expireDate>curentDate
      }
 }
 

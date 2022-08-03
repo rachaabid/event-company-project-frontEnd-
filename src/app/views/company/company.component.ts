@@ -74,7 +74,7 @@ export class CompanyComponent implements OnInit {
     }
     const formData = new FormData
     formData.append('companyForm', this.companyForm?.value);
-    formData.append('photo', this.fileSelected.value)
+    formData.append('photo', this.fileSelected, this.fileSelected.value)
 
     this.companyService.createCompany(formData).subscribe(data => {
       console.log(data),
