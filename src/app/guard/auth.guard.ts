@@ -34,14 +34,20 @@ export class AuthGuard implements CanActivate {
      }
      isExpiredToken(token: string): boolean{
        
-      //  let decodedToken: any = jwt_decode(token);
+       let decodedToken: any = jwt_decode(token);
       //  const expireDate = new Date();
       //  expireDate.setUTCDate(decodedToken.exp);
-      const expireDate = (JSON.parse(atob(token.split('.')[1]))).exp;
-       console.log(expireDate.valueOf())
-       const curentDate = Math.floor(Date.now()/1000);
-       console.log(curentDate.valueOf())
-       return expireDate>curentDate
+      if(decodedToken.exp){
+        const expireDate = (JSON.parse(atob(token.split('.')[1]))).exp;
+         console.log(expireDate.valueOf())
+         const curentDate = Math.floor(Date.now()/1000);
+         console.log(curentDate.valueOf())
+         return expireDate>curentDate
+      }
+      else{
+        this.route.navigate(['/login'])
+        return false
+      }
      }
 }
 

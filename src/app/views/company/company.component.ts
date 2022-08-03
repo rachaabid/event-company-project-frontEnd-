@@ -72,11 +72,16 @@ export class CompanyComponent implements OnInit {
     if (this.companyForm?.invalid) {
       return
     }
-    const formData = new FormData
-    formData.append('companyForm', this.companyForm?.value);
-    formData.append('photo', this.fileSelected, this.fileSelected.value)
+    // let formData:any=new FormData();
+    // const companyForm = this.companyForm?.value;
+    //  delete companyForm.photo
+    // Object.keys(companyForm).forEach(fieldName => {
+    //   formData.append(fieldName, companyForm[fieldName]);
+    // });
 
-    this.companyService.createCompany(formData).subscribe(data => {
+    // formData.append('photo', this.fileSelected, this.fileSelected.name)
+    // console.log(formData)
+    this.companyService.createCompany(this.companyForm?.value).subscribe(data => {
       console.log(data),
       this.toastr.success('Company created', 'Good'),
         location.reload()
