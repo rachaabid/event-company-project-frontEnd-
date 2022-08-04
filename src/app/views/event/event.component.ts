@@ -17,6 +17,7 @@ export class EventComponent implements OnInit {
   id: any;
   fileSelected: any;
   listTags:Array<IOption> =[]
+  
   constructor(private eventService: EventService, private toastr: ToastrService) {
   
    }
