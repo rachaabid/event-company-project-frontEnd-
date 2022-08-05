@@ -13,6 +13,7 @@ export class TagComponent implements OnInit {
   submitted = false;
   listTags: any;
   id: any;
+  searchTag: string = '';
   constructor(private tagService: TagService, private toastr: ToastrService) { }
 
   ngOnInit(): void {

@@ -3,7 +3,12 @@
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalAdd">Add
     Event</button><br>
 
-  <table class="table table-bordered table-sm">
+    <div class="form-group" id="search">
+      <span><i class="fa fa-search"></i></span>
+      <input type="search" class="form-control text-start" placeholder="Search by event" style="width:300px" [(ngModel)]="searchEvent">
+    </div><br>
+
+  <table class="table table-bordered table-hover table-sm ">
     <thead>
       <tr>
         <th>Event No</th>
@@ -11,17 +16,27 @@
         <th>Start Date</th>
         <th>Start Time</th>
         <th>Location</th>
+        <th>Photo</th>
         <th>Price</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let event of listEvents; let i=index">
+      <tr *ngFor="let event of listEvents | eventFilter: searchEvent; let i=index">
         <td>{{i+1}}</td>
         <td>{{event.eventName}}</td>
         <td>{{event.startDate}}</td>
         <td>{{event.startTime}}</td>
         <td>{{event.location}}</td>
-        <td class="badge rounded-pill bg-info text-light">{{event.price}}</td>
+        <td><img [src]="event.photo" width="50px"></td>
+        <td>
+          <span *ngIf="event.eventType == 'free'" class="badge bg-primary">
+            Free
+          </span>
+          <span *ngIf="event.eventType == 'paid'" class="badge bg-success">
+           {{event.price | currency: 'EUR'}}
+          </span>
+        </td>
+
 
         <td>
           <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalUpd"
@@ -115,7 +130,7 @@
                 <label class="form-check-label" for="inlineRadio1">Free</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" formControlName="eventType" value="payed">
+                <input class="form-check-input" type="radio" formControlName="eventType" value="paid">
                 <label class="form-check-label" for="inlineRadio2">Payed</label>
               </div>
               <div class=" invalid-feedback" *ngIf="submitted && eventForm.get('eventType')?.errors?.['required']">
@@ -123,7 +138,7 @@
               </div>
             </div>
 
-            <div class="form-group mb-2" *ngIf="eventForm.value.eventType == 'payed'">
+            <div class="form-group mb-2" *ngIf="eventForm.value.eventType == 'paid'">
               <label for="price">Price:</label>
               <input type="text" class="form-control" formControlName="price" placeholder="Price"
                 [ngClass]="{'is-invalid': submitted && eventForm.get('price')?.errors, 'is-valid': submitted && !eventForm.get('price')?.errors}">
@@ -134,7 +149,7 @@
 
             <div class="form-group mb-2">
               <label for="availableTicketNumber">Available Ticket Number:</label>
-              <input type="number" class="form-control" minlength="0" formControlName="availableTicketNumber"
+              <input type="number" class="form-control" min="1" formControlName="availableTicketNumber"
                 placeholder="Available Ticket Number"
                 [ngClass]="{'is-invalid': submitted && eventForm.get('availableTicketNumber')?.errors, 'is-valid': submitted && !eventForm.get('availableTicketNumber')?.errors}">
               <div class="d-block invalid-feedback"
@@ -258,7 +273,7 @@
                 <label class="form-check-label" for="inlineRadio1">Free</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" formControlName="eventType" value="payed">
+                <input class="form-check-input" type="radio" formControlName="eventType" value="paid">
                 <label class="form-check-label" for="inlineRadio2">Payed</label>
               </div>
               <div class=" invalid-feedback" *ngIf="submitted && eventForm.get('eventType')?.errors?.['required']">
@@ -266,7 +281,7 @@
               </div>
             </div>
 
-            <div class="form-group mb-2" *ngIf="eventForm.value.eventType == 'payed'">
+            <div class="form-group mb-2" *ngIf="eventForm.value.eventType == 'paid'">
               <label for="price">Price:</label>
               <input type="text" class="form-control" formControlName="price" placeholder="Price"
                 [ngClass]="{'is-invalid': submitted && eventForm.get('price')?.errors, 'is-valid': submitted && !eventForm.get('price')?.errors}">
@@ -277,7 +292,7 @@
 
             <div class="form-group mb-2">
               <label for="availableTicketNumber">Available Ticket Number:</label>
-              <input type="number" class="form-control" formControlName="availableTicketNumber"
+              <input type="number" class="form-control" formControlName="availableTicketNumber" min="1"
                 placeholder="Available Ticket Number"
                 [ngClass]="{'is-invalid': submitted && eventForm.get('availableTicketNumber')?.errors, 'is-valid': submitted && !eventForm.get('availableTicketNumber')?.errors}">
               <div class="d-block invalid-feedback"

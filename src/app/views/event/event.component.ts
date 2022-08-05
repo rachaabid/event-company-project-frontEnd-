@@ -17,7 +17,7 @@ export class EventComponent implements OnInit {
   id: any;
   fileSelected: any;
   listTags:Array<IOption> =[]
-  
+  searchEvent: string = '';
   constructor(private eventService: EventService, private toastr: ToastrService) {
   
    }
@@ -68,6 +68,13 @@ export class EventComponent implements OnInit {
     if (this.eventForm?.invalid) {
       return
     }
+    // let formData:any=new FormData();
+    // const eventForm = this.eventForm?.value;
+    //  delete eventForm.photo
+    // Object.keys(eventForm).forEach(fieldName => {
+    //   formData.append(fieldName, eventForm[fieldName]);
+    // });
+    // formData.append('photo', this.fileSelected, this.fileSelected.name)
     this.eventService.createEvent(this.eventForm?.value).subscribe(data=>{
       console.log(data);
       this.toastr.success('Event created', 'Good')
@@ -91,9 +98,15 @@ export class EventComponent implements OnInit {
      if(this.eventForm?.invalid){
        return
      }
-     this.eventService.saveUpdate(this.id, this.eventForm?.value).subscribe(data=>location.reload(),
+     let formData:any=new FormData();
+     const eventForm = this.eventForm?.value;
+      delete eventForm.photo
+     Object.keys(eventForm).forEach(fieldName => {
+       formData.append(fieldName, eventForm[fieldName]);
+     });
+     formData.append('photo', this.fileSelected, this.fileSelected.name)
+     this.eventService.saveUpdate(this.id, formData).subscribe(data=>location.reload(),
      (error)=>{
-      this.toastr.error(error.error.message, 'Error')
       console.log(error)})
    }
 

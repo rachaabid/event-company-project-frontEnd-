@@ -14,7 +14,8 @@ export class CompanyComponent implements OnInit {
   submitted = false;
   listCompanies: any;
   id: any;
-  fileSelected: any;
+  fileSelected: any; 
+  searchCompany: string = '';
   constructor(private companyService: CompanyService,
     private route: Router, private toastr: ToastrService, private changeDetector: ChangeDetectorRef) { }
 
@@ -48,7 +49,15 @@ export class CompanyComponent implements OnInit {
     if (this.companyForm?.invalid) {
       return
     }
-    this.companyService.saveUpdate(this.id, this.companyForm?.value).subscribe(data => {
+    let formData:any=new FormData();
+    const companyForm = this.companyForm?.value;
+     delete companyForm.photo
+    Object.keys(companyForm).forEach(fieldName => {
+      formData.append(fieldName, companyForm[fieldName]);
+    });
+
+    formData.append('photo', this.fileSelected, this.fileSelected.name)
+    this.companyService.saveUpdate(this.id, formData).subscribe(data => {
       location.reload(),
         this.toastr.info('Your data changed', 'Good'),
         (error: any) => {
@@ -72,17 +81,15 @@ export class CompanyComponent implements OnInit {
     if (this.companyForm?.invalid) {
       return
     }
-    // let formData:any=new FormData();
-    // const companyForm = this.companyForm?.value;
-    //  delete companyForm.photo
-    // Object.keys(companyForm).forEach(fieldName => {
-    //   formData.append(fieldName, companyForm[fieldName]);
-    // });
+     let formData:any=new FormData();
+     const companyForm = this.companyForm?.value;
+      delete companyForm.photo
+     Object.keys(companyForm).forEach(fieldName => {
+       formData.append(fieldName, companyForm[fieldName]);
+     });
 
-    // formData.append('photo', this.fileSelected, this.fileSelected.name)
-    // console.log(formData)
-    this.companyService.createCompany(this.companyForm?.value).subscribe(data => {
-      console.log(data),
+     formData.append('photo', this.fileSelected, this.fileSelected.name)
+    this.companyService.createCompany(formData).subscribe(data => {
       this.toastr.success('Company created', 'Good'),
         location.reload()
     }, (error) => {

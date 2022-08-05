@@ -5,11 +5,13 @@ import { EventRoutingModule } from './event-routing.module';
 import { EventComponent } from './event.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectModule } from 'ng-select';
+import { EventFilterPipe } from './pipes/event-filter.pipe';
 
 
 @NgModule({
   declarations: [
-    EventComponent
+    EventComponent,
+    EventFilterPipe
   ],
   imports: [
     CommonModule,
