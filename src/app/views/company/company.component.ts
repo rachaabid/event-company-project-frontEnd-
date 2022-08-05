@@ -51,12 +51,12 @@ export class CompanyComponent implements OnInit {
     }
     let formData:any=new FormData();
     const companyForm = this.companyForm?.value;
-     delete companyForm.photo
     Object.keys(companyForm).forEach(fieldName => {
       formData.append(fieldName, companyForm[fieldName]);
     });
-
-    formData.append('photo', this.fileSelected, this.fileSelected.name)
+    if(this.fileSelected){
+      formData.append('photo', this.fileSelected, this.fileSelected.name)
+    }
     this.companyService.saveUpdate(this.id, formData).subscribe(data => {
       location.reload(),
         this.toastr.info('Your data changed', 'Good'),
@@ -83,12 +83,11 @@ export class CompanyComponent implements OnInit {
     }
      let formData:any=new FormData();
      const companyForm = this.companyForm?.value;
-      delete companyForm.photo
      Object.keys(companyForm).forEach(fieldName => {
        formData.append(fieldName, companyForm[fieldName]);
      });
-
-     formData.append('photo', this.fileSelected, this.fileSelected.name)
+    if(this.fileSelected){ 
+      formData.append('photo', this.fileSelected, this.fileSelected.name)}
     this.companyService.createCompany(formData).subscribe(data => {
       this.toastr.success('Company created', 'Good'),
         location.reload()
