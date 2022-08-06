@@ -33,7 +33,7 @@ export class EventComponent implements OnInit {
       startTime: new FormControl('', Validators.required),
       endTime: new FormControl('', Validators.required),
       photo: new FormControl(''),
-      price: new FormControl('', Validators.required),
+      price: new FormControl(''),
       availableTicketNumber: new FormControl('', Validators.required),
       eventType: new FormControl('', Validators.required),
       location: new FormControl('', Validators.required),
