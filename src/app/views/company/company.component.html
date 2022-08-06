@@ -4,7 +4,6 @@
     Company</button><br>
 
     <div class="form-group" id="search">
-      <span><i class="fa fa-search"></i></span>
       <input type="search" class="form-control text-start" placeholder="Search by company" style="width:300px" [(ngModel)]="searchCompany">
     </div><br>
 
@@ -29,8 +28,8 @@
         <td><img [src]="company.photo" width="50px"></td>
         <td>
           <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalUpd"
-            (click)="showCompanyData(company._id)">Update</button>
-          <button type="button" class="btn btn-danger" (click)="deleteCompany(company._id)">Delete</button>
+            (click)="showCompanyData(company._id)"><span><i class="fa fa-edit"></i></span></button>
+          <button type="button" class="btn btn-danger" (click)="deleteCompany(company._id)"><span><i class="fa fa-trash-alt"></i></span></button>
         </td>
       </tr>
     </tbody>
