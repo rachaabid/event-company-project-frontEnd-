@@ -16,6 +16,7 @@ export class CompanyComponent implements OnInit {
   id: any;
   fileSelected: any; 
   searchCompany: string = '';
+  hide = false;
   constructor(private companyService: CompanyService,
     private route: Router, private toastr: ToastrService, private changeDetector: ChangeDetectorRef) { }
 

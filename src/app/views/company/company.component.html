@@ -3,9 +3,10 @@
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalAdd">Add
     Company</button><br>
 
-    <div class="form-group" id="search">
-      <input type="search" class="form-control text-start" placeholder="Search by company" style="width:300px" [(ngModel)]="searchCompany">
-    </div><br>
+  <div class="form-group" id="search">
+    <input type="search" class="form-control text-start" placeholder="Search by company" style="width:300px"
+      [(ngModel)]="searchCompany">
+  </div><br>
 
   <table class="table table-bordered table-hover table-sm">
     <thead>
@@ -27,10 +28,11 @@
         <td>{{company.email}}</td>
         <td>{{company.role}}</td>
         <td><img [src]="company.photo" width="50px"></td>
-        <td>
+        <td *ngIf="company.role == 'superAdmin'" >
           <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalUpd"
             (click)="showCompanyData(company._id)"><span><i class="fa fa-edit"></i></span></button>
-          <button type="button" class="btn btn-danger" (click)="deleteCompany(company._id)"><span><i class="fa fa-trash-alt"></i></span></button>
+          <button type="button" class="btn btn-danger" (click)="deleteCompany(company._id)"><span><i
+                class="fa fa-trash-alt"></i></span></button>
         </td>
       </tr>
     </tbody>
@@ -92,16 +94,16 @@
 
             <div class="form-group mb-2">
               <label for="role">Role:</label>
-              <input type="text" class="form-control" formControlName="role" placeholder="Role"
-                [ngClass]="{'is-invalid': submitted && companyForm.get('role')?.errors, 'is-valid': submitted && !companyForm.get('role')?.errors}">
-              <div class="d-block invalid-feedback" *ngIf="submitted && companyForm.get('role')?.errors?.['required']">
-                Role is required
-              </div>
+              <select class="form-select" formControlName="role" aria-label="Role">
+                <option disabled>Select Your Role</option>
+                <option value="Admin">Admin</option>
+                <option value="superAdmin">Super Admin</option>
+              </select>
             </div>
 
             <div class="form-group mb-2">
               <label for="photo">Photo:</label>
-              <input type="file" (change)="selectImage($event)" accept="image/*">  
+              <input type="file" (change)="selectImage($event)" accept="image/*">
             </div>
             <img *ngIf="companyForm.value.photo" [src]="companyForm.value.photo" style="height: 50px; width:50px">
 
@@ -174,15 +176,15 @@
             </div>
 
             <div class="form-group mb-2">
-              <label for="role">Role</label>
-              <select>
-                <option value="admin">Admin</option>
+              <label for="role">Role: </label>
+              <select class="form-select" formControlName="role" aria-placeholder="Select Your Role">
+                <option value="Admin">Admin</option>
                 <option value="superAdmin">Super Admin</option>
               </select>
-              
+
               <!-- <input type="text" class="form-control" formControlName="role" placeholder="Role"
                 [ngClass]="{'is-invalid': submitted && companyForm.get('role')?.errors, 'is-valid': submitted && !companyForm.get('role')?.errors}"> -->
-              <div class="d-block invalid-feedback" *ngIf="submitted && companyForm.get('role')?.errors?.['required']">
+              <div class="invalid-feedback" *ngIf="submitted && companyForm.get('role')?.errors?.['required']">
                 Role is required
               </div>
             </div>
