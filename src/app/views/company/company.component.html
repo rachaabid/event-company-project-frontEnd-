@@ -8,35 +8,44 @@
       [(ngModel)]="searchCompany">
   </div><br>
 
-  <table class="table table-bordered table-hover table-sm">
+  <table class="table table-bordered table-hover table-sm" [mfData]="listCompanies" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
     <thead>
       <tr>
         <th>No</th>
-        <th>Company Name</th>
-        <th>Company Description</th>
-        <th>Email</th>
-        <th>Role</th>
+        <th><mfDefaultSorter by="companyName">Company Name</mfDefaultSorter></th>
+        <th><mfDefaultSorter by="companyDescription">Description</mfDefaultSorter></th>
+        <th><mfDefaultSorter by="email">Email</mfDefaultSorter></th>
+        <th><mfDefaultSorter by="role">Role</mfDefaultSorter></th>
         <th>Photo</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let company of listCompanies | companyFilter: searchCompany; let i=index">
+      <tr *ngFor="let company of mf.listCompanies | companyFilter: searchCompany; let i=index">
         <td>{{i+1}}</td>
         <td>{{company.companyName}}</td>
         <td>{{company.companyDescription}}</td>
         <td>{{company.email}}</td>
         <td>{{company.role}}</td>
         <td><img [src]="company.photo" width="50px"></td>
-        <td *ngIf="company.role == 'superAdmin'" >
-          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalUpd"
+        <td>
+          <button *ngIf="company.role == 'admin'" [hidden]="show" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalUpd"
             (click)="showCompanyData(company._id)"><span><i class="fa fa-edit"></i></span></button>
-          <button type="button" class="btn btn-danger" (click)="deleteCompany(company._id)"><span><i
+          <button [hidden]="hide" type="button" class="btn btn-danger" (click)="deleteCompany(company._id)"><span><i
                 class="fa fa-trash-alt"></i></span></button>
         </td>
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+          <td colspan="4">
+              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+      </tr>
+      </tfoot>
   </table>
+
+ 
 
   <div class="modal" id="ModalAdd">
     <div class="modal-dialog">
@@ -96,7 +105,7 @@
               <label for="role">Role:</label>
               <select class="form-select" formControlName="role" aria-label="Role">
                 <option disabled>Select Your Role</option>
-                <option value="Admin">Admin</option>
+                <option value="admin">Admin</option>
                 <option value="superAdmin">Super Admin</option>
               </select>
             </div>
@@ -178,7 +187,7 @@
             <div class="form-group mb-2">
               <label for="role">Role: </label>
               <select class="form-select" formControlName="role" aria-placeholder="Select Your Role">
-                <option value="Admin">Admin</option>
+                <option value="admin">Admin</option>
                 <option value="superAdmin">Super Admin</option>
               </select>
 

@@ -50,7 +50,6 @@ import { ToastrModule } from 'ngx-toastr';
 import {MyInterceptor} from './my-interceptor';
 
 
-
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };

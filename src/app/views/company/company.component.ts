@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -12,13 +12,17 @@ import { CompanyService } from './services/company.service';
 export class CompanyComponent implements OnInit {
   companyForm?: FormGroup;
   submitted = false;
-  listCompanies: any;
+  listCompanies?: any[];
   id: any;
   fileSelected: any; 
   searchCompany: string = '';
-  hide = false;
+  hide = true;
+  show = false;
+  rowsOnPage = 5;
+  sortBy = 'createdAt';
+  sortOrder = 'desc';
   constructor(private companyService: CompanyService,
-    private route: Router, private toastr: ToastrService, private changeDetector: ChangeDetectorRef) { }
+    private route: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loadCompanies();
@@ -33,8 +37,10 @@ export class CompanyComponent implements OnInit {
   }
 
   loadCompanies() {
-    this.companyService.getCompanies().subscribe(data => this.listCompanies = data);
-  }
+    this.companyService.getCompanies().subscribe((data: any) => this.listCompanies = data);
+    }
+    
+  
 
   showCompanyData(id: any) {
     this.id = id;
@@ -82,6 +88,14 @@ export class CompanyComponent implements OnInit {
     if (this.companyForm?.invalid) {
       return
     }
+    if(this.companyForm?.controls['role'].value == 'admin'){
+     this.show = true;
+     this.hide = false;
+    }
+    // else if(this.companyForm?.controls['role'].value == 'superAdmin'){
+    //  this.hide = true;
+    //  this.show = false;
+    // }
      let formData:any=new FormData();
      const companyForm = this.companyForm?.value;
      Object.keys(companyForm).forEach(fieldName => {
