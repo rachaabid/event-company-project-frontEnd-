@@ -12,15 +12,11 @@ import { CompanyService } from './services/company.service';
 export class CompanyComponent implements OnInit {
   companyForm?: FormGroup;
   submitted = false;
-  listCompanies?: any[];
+  listCompanies?: any;
   id: any;
   fileSelected: any; 
   searchCompany: string = '';
-  hide = true;
-  show = false;
-  rowsOnPage = 5;
-  sortBy = 'createdAt';
-  sortOrder = 'desc';
+  companyConnectedId: any;
   constructor(private companyService: CompanyService,
     private route: Router, private toastr: ToastrService) { }
 
@@ -34,6 +30,7 @@ export class CompanyComponent implements OnInit {
       role: new FormControl(''),
       photo: new FormControl('')
     })
+
   }
 
   loadCompanies() {
@@ -88,14 +85,7 @@ export class CompanyComponent implements OnInit {
     if (this.companyForm?.invalid) {
       return
     }
-    if(this.companyForm?.controls['role'].value == 'admin'){
-     this.show = true;
-     this.hide = false;
-    }
-    // else if(this.companyForm?.controls['role'].value == 'superAdmin'){
-    //  this.hide = true;
-    //  this.show = false;
-    // }
+  
      let formData:any=new FormData();
      const companyForm = this.companyForm?.value;
      Object.keys(companyForm).forEach(fieldName => {

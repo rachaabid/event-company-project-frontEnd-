@@ -123,7 +123,8 @@ const routes: Routes = [
   },
   {
     path: 'resetPassword/:resetToken/:id', component: ResetPasswordComponent
-  }, 
+  },
+  { path: 'clientSide', loadChildren: () => import('./client-side/client-side.module').then(m => m.ClientSideModule) }, 
   {path: '**', redirectTo: 'dashboard'}
 ];
 

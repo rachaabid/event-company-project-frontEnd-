@@ -9,7 +9,7 @@ export class EventFilterPipe implements PipeTransform {
     if(!listEvents || !searchEvent){
       return listEvents;
     }
-    return listEvents.filter(event=>event.eventName?.toLowerCase().includes(searchEvent.toLowerCase()));
+    return listEvents.filter(event=>event.eventName?.toLowerCase().includes(searchEvent.toLowerCase()) || event.location?.toLowerCase().includes(searchEvent.toLowerCase()));
   }
 
 }

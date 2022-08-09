@@ -5,7 +5,6 @@ import { CompanyRoutingModule } from './company-routing.module';
 import { CompanyComponent } from './company.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {CompanyFilterPipe} from './pipes/company-filter.pipe'
-import { DataTableModule } from 'angular2-datatable';
 
 
 
@@ -18,8 +17,7 @@ import { DataTableModule } from 'angular2-datatable';
     CommonModule,
     CompanyRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-    DataTableModule
+    ReactiveFormsModule
   ]
 })
 export class CompanyModule { }

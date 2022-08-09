@@ -1,27 +1,28 @@
 <div class="container  mt-3">
-  <h3 class="text-center">List Companies</h3>
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalAdd">Add
-    Company</button><br>
+  <h1 class="text-center mb-3"><mark>List Companies</mark></h1>
 
-  <div class="form-group" id="search">
-    <input type="search" class="form-control text-start" placeholder="Search by company" style="width:300px"
-      [(ngModel)]="searchCompany">
-  </div><br>
-
-  <table class="table table-bordered table-hover table-sm" [mfData]="listCompanies" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+  <div class="d-flex row justify-content-between mb-3">
+    <button type="button" class="btn btn-primary col-3" data-bs-toggle="modal" data-bs-target="#ModalAdd">Add
+      Company</button>
+     
+      <input type="search" class="form-control text-start col-4" placeholder="Search by company" style="width:300px"
+        [(ngModel)]="searchCompany">
+  </div>
+  
+   <table class="table table-bordered table-hover table-sm">
     <thead>
       <tr>
         <th>No</th>
-        <th><mfDefaultSorter by="companyName">Company Name</mfDefaultSorter></th>
-        <th><mfDefaultSorter by="companyDescription">Description</mfDefaultSorter></th>
-        <th><mfDefaultSorter by="email">Email</mfDefaultSorter></th>
-        <th><mfDefaultSorter by="role">Role</mfDefaultSorter></th>
+        <th>Company Name</th>
+        <th>Company Description</th>
+        <th>Email</th>
+        <th>Role</th>
         <th>Photo</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let company of mf.listCompanies | companyFilter: searchCompany; let i=index">
+      <tr *ngFor="let company of listCompanies | companyFilter: searchCompany; let i=index">
         <td>{{i+1}}</td>
         <td>{{company.companyName}}</td>
         <td>{{company.companyDescription}}</td>
@@ -29,20 +30,13 @@
         <td>{{company.role}}</td>
         <td><img [src]="company.photo" width="50px"></td>
         <td>
-          <button *ngIf="company.role == 'admin'" [hidden]="show" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalUpd"
+          <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#ModalUpd"
             (click)="showCompanyData(company._id)"><span><i class="fa fa-edit"></i></span></button>
-          <button [hidden]="hide" type="button" class="btn btn-danger" (click)="deleteCompany(company._id)"><span><i
+          <button type="button" class="btn btn-light" *ngIf="companyConnectedId == company._id" (click)="deleteCompany(company._id)"><span><i
                 class="fa fa-trash-alt"></i></span></button>
         </td>
       </tr>
     </tbody>
-    <tfoot>
-      <tr>
-          <td colspan="4">
-              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-          </td>
-      </tr>
-      </tfoot>
   </table>
 
  
@@ -105,8 +99,8 @@
               <label for="role">Role:</label>
               <select class="form-select" formControlName="role" aria-label="Role">
                 <option disabled>Select Your Role</option>
-                <option value="admin">Admin</option>
-                <option value="superAdmin">Super Admin</option>
+                <option value="Admin">Admin</option>
+                <option value="Super_Admin">Super Admin</option>
               </select>
             </div>
 
@@ -187,8 +181,8 @@
             <div class="form-group mb-2">
               <label for="role">Role: </label>
               <select class="form-select" formControlName="role" aria-placeholder="Select Your Role">
-                <option value="admin">Admin</option>
-                <option value="superAdmin">Super Admin</option>
+                <option value="Admin">Admin</option>
+                <option value="Super_Admin">Super Admin</option>
               </select>
 
               <!-- <input type="text" class="form-control" formControlName="role" placeholder="Role"
