@@ -8,6 +8,7 @@ import { EventListComponent } from './event-list/event-list.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import { NavbarComponent } from './navbar/navbar.component';
   ],
   imports: [
     CommonModule,
-    ClientSideRoutingModule
+    ClientSideRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ClientSideModule { }

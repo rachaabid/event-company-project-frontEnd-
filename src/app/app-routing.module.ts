@@ -9,6 +9,7 @@ import { RegisterComponent } from './views/pages/register/register.component';
 import { ForgetPasswordComponent } from './views/pages/resetForgetPassword/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './views/pages/resetForgetPassword/reset-password/reset-password.component';
  import {AuthGuard} from './guard/auth.guard';
+import { ClientSideComponent } from './client-side/client-side.component';
 
 const routes: Routes = [
   {
@@ -124,7 +125,7 @@ const routes: Routes = [
   {
     path: 'resetPassword/:resetToken/:id', component: ResetPasswordComponent
   },
-  { path: 'clientSide', loadChildren: () => import('./client-side/client-side.module').then(m => m.ClientSideModule) }, 
+  { path: 'home', loadChildren: () => import('./client-side/client-side.module').then(m => m.ClientSideModule) }, 
   {path: '**', redirectTo: 'dashboard'}
 ];
 

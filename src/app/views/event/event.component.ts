@@ -79,7 +79,7 @@ export class EventComponent implements OnInit {
     this.eventService.createEvent(formData).subscribe(data=>{
       console.log(data);
       this.toastr.success('Event created', 'Good')
-      location.reload()
+      // location.reload()
     }, (error)=>{
       console.log(error)
     }

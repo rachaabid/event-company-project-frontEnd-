@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CompanyService } from './services/company.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-company',
@@ -14,9 +15,10 @@ export class CompanyComponent implements OnInit {
   submitted = false;
   listCompanies?: any;
   id: any;
-  fileSelected: any; 
+  fileSelected: any;
   searchCompany: string = '';
   companyConnectedId: any;
+  companyConnectedRole: any;
   constructor(private companyService: CompanyService,
     private route: Router, private toastr: ToastrService) { }
 
@@ -31,13 +33,18 @@ export class CompanyComponent implements OnInit {
       photo: new FormControl('')
     })
 
+    const token = localStorage.getItem('token') || '';
+    let decodedToken: any = jwt_decode(token);
+    this.companyConnectedId = decodedToken.companyId;
+    this.companyConnectedRole = decodedToken.role;
+    console.log(decodedToken.role)
   }
 
   loadCompanies() {
     this.companyService.getCompanies().subscribe((data: any) => this.listCompanies = data);
-    }
-    
-  
+  }
+
+
 
   showCompanyData(id: any) {
     this.id = id;
@@ -53,18 +60,19 @@ export class CompanyComponent implements OnInit {
     if (this.companyForm?.invalid) {
       return
     }
-    let formData:any=new FormData();
+    let formData: any = new FormData();
     const companyForm = this.companyForm?.value;
     Object.keys(companyForm).forEach(fieldName => {
       formData.append(fieldName, companyForm[fieldName]);
     });
-    if(this.fileSelected){
+    if (this.fileSelected) {
       formData.append('photo', this.fileSelected, this.fileSelected.name)
     }
     this.companyService.saveUpdate(this.id, formData).subscribe(data => {
       location.reload(),
         this.toastr.info('Your data changed', 'Good'),
         (error: any) => {
+          this.toastr.error('Company already exist', 'Exist')
           console.log(error)
         }
     })
@@ -85,18 +93,20 @@ export class CompanyComponent implements OnInit {
     if (this.companyForm?.invalid) {
       return
     }
-  
-     let formData:any=new FormData();
-     const companyForm = this.companyForm?.value;
-     Object.keys(companyForm).forEach(fieldName => {
-       formData.append(fieldName, companyForm[fieldName]);
-     });
-    if(this.fileSelected){ 
-      formData.append('photo', this.fileSelected, this.fileSelected.name)}
+
+    let formData: any = new FormData();
+    const companyForm = this.companyForm?.value;
+    Object.keys(companyForm).forEach(fieldName => {
+      formData.append(fieldName, companyForm[fieldName]);
+    });
+    if (this.fileSelected) {
+      formData.append('photo', this.fileSelected, this.fileSelected.name)
+    }
     this.companyService.createCompany(formData).subscribe(data => {
-      this.toastr.success('Company created', 'Good'),
-        location.reload()
+      this.toastr.success('Company created', 'Good')
+      location.reload()
     }, (error) => {
+      this.toastr.error('Company already exist', 'Exist')
       console.log(error)
     }
     )

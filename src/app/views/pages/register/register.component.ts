@@ -29,9 +29,8 @@ this.submitted =true;
 if (this.companyForm?.invalid){
   return
 }
-// localStorage.setItem('token', JSON.stringify(JSON.parse(localStorage.getItem('token')||'[]')))
 this.registerService.signup(this.companyForm?.value).subscribe(response=>{
-this.toastr.warning('Company created', 'Hello')
+this.toastr.success('Company created', 'Hello')
 }, error=>{
   console.log(error);
 });
