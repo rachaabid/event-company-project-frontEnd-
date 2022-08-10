@@ -37,7 +37,6 @@ export class CompanyComponent implements OnInit {
     let decodedToken: any = jwt_decode(token);
     this.companyConnectedId = decodedToken.companyId;
     this.companyConnectedRole = decodedToken.role;
-    console.log(decodedToken.role)
   }
 
   loadCompanies() {
@@ -48,7 +47,6 @@ export class CompanyComponent implements OnInit {
 
   showCompanyData(id: any) {
     this.id = id;
-    console.log(id);
     this.companyService.getCompanyById(id).subscribe(data => {
       this.companyForm?.patchValue(data),
         this.toastr.info('here is your data', 'To modify')
@@ -73,7 +71,6 @@ export class CompanyComponent implements OnInit {
         this.toastr.info('Your data changed', 'Good'),
         (error: any) => {
           this.toastr.error('Company already exist', 'Exist')
-          console.log(error)
         }
     })
   }
@@ -107,7 +104,6 @@ export class CompanyComponent implements OnInit {
       location.reload()
     }, (error) => {
       this.toastr.error('Company already exist', 'Exist')
-      console.log(error)
     }
     )
 

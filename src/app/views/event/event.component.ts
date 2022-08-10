@@ -47,8 +47,7 @@ export class EventComponent implements OnInit {
   }
   
   loadTags(){
-    this.eventService.getTags().subscribe((data:any)=>{this.listTags=data,
-    console.log(data)})
+    this.eventService.getTags().subscribe((data:any)=>{this.listTags=data})
     
   }
 
@@ -77,7 +76,6 @@ export class EventComponent implements OnInit {
        formData.append('photo', this.fileSelected, this.fileSelected.name)
      }
     this.eventService.createEvent(formData).subscribe(data=>{
-      console.log(data);
       this.toastr.success('Event created', 'Good')
       // location.reload()
     }, (error)=>{
