@@ -26,8 +26,7 @@ submitted= false;
     if (this.logForm?.invalid){
       return
     }
-    this.loginService.signIn(this.logForm?.value).subscribe((response: any)=>{
-      console.log(response); 
+    this.loginService.signIn(this.logForm?.value).subscribe((response: any)=>{ 
       localStorage.setItem('token', response.token)
       this.toastr.success('Welcome to dashboard', 'Hello')
       this.route.navigate(['/dashboard']);

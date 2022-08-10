@@ -29,7 +29,6 @@ submitted = false;
 
   forgetPassword(){
     this.forgetService.forget(this.forgetForm?.value).subscribe(response=>{
-      console.log(response);
       this.toastr.info('Email sent', 'Hello');
     }, error=>{
     console.log(error)
@@ -42,7 +41,6 @@ submitted = false;
       return
     }
     this.loginService.signIn(this.logForm?.value).subscribe(response=>{
-      console.log(response); 
       this.toastr.success('Welcome to dashboard', 'Hello')
       this.route.navigate(['/dashboard']);
     }, error=>{
