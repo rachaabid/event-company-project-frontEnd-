@@ -32,7 +32,7 @@
         <td>
           <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#ModalUpd"
             (click)="showCompanyData(company._id)"><span><i class="fa fa-edit"></i></span></button>
-          <button type="button" class="btn btn-light" *ngIf="companyConnectedId == company._id" (click)="deleteCompany(company._id)"><span><i
+          <button type="button" class="btn btn-light" *ngIf="companyConnectedId !== company._id" (click)="deleteCompany(company._id)"><span><i
                 class="fa fa-trash-alt"></i></span></button>
         </td>
       </tr>
