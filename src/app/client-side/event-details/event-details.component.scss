@@ -1,17 +1,30 @@
-.container{
+.container {
   margin-left: 200px;
+ 
 }
 
-img{
+.card {
+  margin-top: 100px;
+  box-shadow: 10px 10px 15px gray;
+}
+
+img {
   height: 100%;
 }
 
-h5{
-  font-size: larger;
+h3 {
   font-weight: bolder;
   font-style: italic;
 }
 
-p{
+p {
   font-weight: 600;
+  font-size: large;
+}
+
+.btn{
+color: aliceblue;
+font-size: larger;
+display: block;
+float: right;
 }

@@ -8,13 +8,13 @@ import { EventService } from 'src/app/views/event/services/event.service';
   styleUrls: ['./event-details.component.scss']
 })
 export class EventDetailsComponent implements OnInit {
- event: any;
- idEvent: any;
-  constructor(private eventService: EventService, private route:ActivatedRoute) { }
+  event: any;
+  idEvent: any;
+  constructor(private eventService: EventService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
- this.idEvent = this.route.snapshot.params['id'];
-    this.eventService.getEventById(this.idEvent).subscribe(response=>this.event=response);
+    this.idEvent = this.route.snapshot.params['id'];
+    this.eventService.getEventById(this.idEvent).subscribe(response => this.event = response);
   }
 
 

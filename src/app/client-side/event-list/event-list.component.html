@@ -17,8 +17,8 @@
               <p class="card-text">{{event.eventType}}</p>
             </div><br>
 
-            <button class="btn btn-light col-5 justify-content-center" type="button"
-              [routerLink]="['events/reservation/', event._id]">Reservation</button>
+            
+              <small class="text-muted">For more details click <a [routerLink]="['event-details/', event._id]">here</a></small>
           </div>
         </div>
       </div>
