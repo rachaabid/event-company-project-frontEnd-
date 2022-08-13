@@ -14,11 +14,10 @@
               <p class="card-text">
                 <span>Start from:</span> {{event.startDate}} {{event.startTime}}</p>
               <p class="card-text"><span>Location:</span> {{event.location}}</p>
-              <p class="card-text">{{event.eventType}}</p>
-            </div><br>
-
-            
+              <p class="card-text mb-5">{{event.eventType}}</p>
+              <hr>
               <small class="text-muted">For more details click <a [routerLink]="['event-details/', event._id]">here</a></small>
+            </div>  
           </div>
         </div>
       </div>
