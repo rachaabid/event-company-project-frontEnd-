@@ -1,5 +1,5 @@
 <div class="container  mt-3">
-  <h3 class="text-center mb-3">List Tags</h3>
+  <h1 class="text-center mb-3">List Tags</h1>
 
   <div class="d-flex row justify-content-between mb-3">
     <button type="button" class="btn btn-primary col-3" data-bs-toggle="modal" data-bs-target="#ModalAdd">Add
@@ -9,13 +9,13 @@
       [(ngModel)]="searchTag">
   </div>
 
-  <table class="table table-bordered table-sm">
-    <thead>
+  <table class="table table-bordered table-hover">
+    <thead class="table-success">
       <tr>
-        <th>No</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Actions</th>
+        <th class="col-1">No</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th class="col-2">Actions</th>
       </tr>
     </thead>
     <tbody>

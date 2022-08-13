@@ -1,5 +1,5 @@
 <div class="container  mt-3">
-  <h1 class="text-center mb-3"><mark>List Companies</mark></h1>
+  <h1 class="text-center mb-3">List Companies</h1>
 
   <div class="d-flex row justify-content-between mb-3">
     <button type="button" class="btn btn-primary col-3" data-bs-toggle="modal" data-bs-target="#ModalAdd">Add
@@ -9,21 +9,21 @@
         [(ngModel)]="searchCompany">
   </div>
   
-   <table class="table table-bordered table-hover table-sm">
-    <thead>
+   <table class="table table-hover table-bordered">
+    <thead class="table-success">
       <tr>
-        <th>No</th>
-        <th>Company Name</th>
-        <th>Company Description</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Photo</th>
-        <th>Actions</th>
+        <th class="col-1">No</th>
+        <th scope="col">Company Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        <th scope="col">Photo</th>
+        <th class="col-2">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let company of listCompanies | companyFilter: searchCompany; let i=index">
-        <td>{{i+1}}</td>
+        <td scope="row">{{i+1}}</td>
         <td>{{company.companyName}}</td>
         <td>{{company.companyDescription}}</td>
         <td>{{company.email}}</td>

@@ -1,1 +1,28 @@
-<p>event-list works!</p>
+<div class="container">
+  <div class="row">
+    <div class="card-group col-sm-6 col-md-4 col-lg-3" *ngFor="let event of listEvents">
+      <div class="flip-card ">
+        <div class="flip-card-inner ">
+          <div class="flip-card-front h-100" [routerLink]="['event-details/', event._id]">
+            <img class="card-img" [src]="event.photo">
+          </div>
+          <div class="flip-card-back">
+            <div class="card-body">
+              <h5 class="card-title mb-5">
+                {{event.eventName}}
+              </h5>
+              <p class="card-text">
+                <span>Start from:</span> {{event.startDate}} {{event.startTime}}</p>
+              <p class="card-text"><span>Location:</span> {{event.location}}</p>
+              <p class="card-text">{{event.eventType}}</p>
+            </div><br>
+
+            <button class="btn btn-light col-5 justify-content-center" type="button"
+              [routerLink]="['events/reservation/', event._id]">Reservation</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
