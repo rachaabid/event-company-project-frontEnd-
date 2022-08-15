@@ -16,6 +16,10 @@ export class EventService {
     return this.http.get(`${this.baseURL}Events`);
   }
 
+  getEventsNotStarted(){
+    return this.http.get(`${this.baseURL}EventsNotStarted`)
+  }
+
   getTags()
   {
    return this.http.get(`${this.baseURL}listTags`)

@@ -31,7 +31,8 @@ export class CompanyService {
   return this.http.put(`${this.baseURL}Companies/${companyId}`, data);
  }
 
- deleteToken(){
+ logOut(){
   localStorage.removeItem('token');
+  return this.http.get(`${this.baseURL}logout`);
  } 
 }

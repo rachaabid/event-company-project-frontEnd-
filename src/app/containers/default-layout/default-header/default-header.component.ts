@@ -3,6 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ClassToggleService, HeaderComponent } from '@coreui/angular';
+import { ToastrService } from 'ngx-toastr';
+
 import { CompanyService } from 'src/app/views/company/services/company.service';
 
 @Component({
@@ -17,12 +19,14 @@ export class DefaultHeaderComponent extends HeaderComponent {
   public newTasks = new Array(5)
   public newNotifications = new Array(5)
 
-  constructor(private classToggler: ClassToggleService, private router: Router, private companyService: CompanyService) {
+  constructor(private classToggler: ClassToggleService, private router: Router, private companyService: CompanyService, private toastr: ToastrService) {
     super();
   }
 
   onLogout() {
-    this.companyService.deleteToken();
-    this.router.navigate(['/login']);
+    this.companyService.logOut().subscribe(response => {
+      location.reload();
+      this.toastr.info('Disconnected', 'Status')
+    });
   }
 }

@@ -126,7 +126,7 @@ const routes: Routes = [
     path: 'resetPassword/:resetToken/:id', component: ResetPasswordComponent
   },
   { path: 'home', loadChildren: () => import('./client-side/client-side.module').then(m => m.ClientSideModule) }, 
-  {path: '**', redirectTo: 'dashboard'}
+  // {path: '**', redirectTo: 'dashboard'}
 ];
 
 @NgModule({

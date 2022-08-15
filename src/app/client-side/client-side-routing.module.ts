@@ -26,7 +26,7 @@ const routes: Routes = [
         path:'events/event-details/:id', component: EventDetailsComponent
       },
       {
-        path:'events/reservation/:id', component: ReservationComponent
+        path:'events/event-details/:id/reservation', component: ReservationComponent
       }
     ]
   },
