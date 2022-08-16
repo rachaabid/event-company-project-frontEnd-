@@ -6,23 +6,28 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h3 class="card-title">{{event.eventName}}</h3>
-          <p class="card-text">Description: {{event.eventDescription}}</p>
-          <p class="card-text">From {{event.startDate}} {{event.startTime}} to {{event.endDate}} {{event.endTime}}
+          <h3 class="card-title">{{event.eventName | titlecase}}</h3>
+          <p class="card-text">{{event.eventDescription | titlecase}}</p>
+          <p class="card-text">From: {{event.startDate | date}} {{event.startTime}} to: {{event.endDate | date}} {{event.endTime}}
           </p>
-          <p class="card-text">Tickets: {{event.availableTicketNumber}}</p>
-          <p class="card-text">Location: {{event.location}}</p>
+          <p class="card-text">Tickets:
+            <span *ngIf="event.availableTicketNumber !== 0"> {{event.availableTicketNumber}}</span>
+            <span *ngIf="event.availableTicketNumber == 0">All tickets were sold!</span>
+          </p>
+          <p class="card-text">Location: {{event.location | titlecase}}</p>
 
-          <span *ngIf="event.eventType == 'free'" class="badge bg-primary">
-            Free
-          </span>
-          <span *ngIf="event.eventType == 'paid'" class="badge bg-success">
-            {{event.price | currency: 'EUR'}}
-          </span>
-          <hr>
+          <div *ngIf="event.availableTicketNumber !== 0">
+            <span *ngIf="event.eventType == 'free'" class="badge bg-primary">
+              Free
+            </span>
+            <span *ngIf="event.eventType == 'paid'" class="badge bg-success">
+              {{event.price | currency: 'EUR'}}
+            </span>
+            <hr>
+          </div>
 
-          <button class="btn btn-success col-4 mb-2" type="button"
-              [routerLink]="['events/reservation/', event._id]">Reservation</button>
+          <button class="btn btn-success col-4 mb-2" type="button" *ngIf="event.availableTicketNumber !== 0"
+            [routerLink]="['reservation']">Reservation</button>
 
         </div>
       </div>

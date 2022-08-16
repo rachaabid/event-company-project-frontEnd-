@@ -152,7 +152,7 @@
 
             <div class="form-group mb-2">
               <label for="availableTicketNumber">Available Ticket Number:</label>
-              <input type="number" class="form-control" min="1" formControlName="availableTicketNumber"
+              <input type="number" class="form-control" min="0" formControlName="availableTicketNumber"
                 placeholder="Available Ticket Number"
                 [ngClass]="{'is-invalid': submitted && eventForm.get('availableTicketNumber')?.errors, 'is-valid': submitted && !eventForm.get('availableTicketNumber')?.errors}">
               <div class="d-block invalid-feedback"
@@ -295,7 +295,7 @@
 
             <div class="form-group mb-2">
               <label for="availableTicketNumber">Available Ticket Number:</label>
-              <input type="number" class="form-control" formControlName="availableTicketNumber" min="1"
+              <input type="number" class="form-control" formControlName="availableTicketNumber" min="0"
                 placeholder="Available Ticket Number"
                 [ngClass]="{'is-invalid': submitted && eventForm.get('availableTicketNumber')?.errors, 'is-valid': submitted && !eventForm.get('availableTicketNumber')?.errors}">
               <div class="d-block invalid-feedback"

@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="card-group col-sm-6 col-md-4 col-lg-3" *ngFor="let event of listEvents">
+    <div class="card-group mt-3 col-sm-6 col-md-4 col-lg-3" *ngFor="let event of listEvents">
       <div class="flip-card ">
         <div class="flip-card-inner ">
           <div class="flip-card-front h-100" [routerLink]="['event-details/', event._id]">
@@ -9,12 +9,12 @@
           <div class="flip-card-back">
             <div class="card-body">
               <h5 class="card-title mb-5">
-                {{event.eventName}}
+                {{event.eventName | titlecase}}
               </h5>
               <p class="card-text">
-                <span>Start from:</span> {{event.startDate}} {{event.startTime}}</p>
-              <p class="card-text"><span>Location:</span> {{event.location}}</p>
-              <p class="card-text mb-5">{{event.eventType}}</p>
+                <span>Start from: </span> {{event.startDate | date}} {{event.startTime}}</p>
+              <p class="card-text"><span>Location: </span>{{event.location | titlecase}}</p>
+              <p class="card-text mb-5">{{event.eventType | titlecase}}</p>
               <hr>
               <small class="text-muted">For more details click <a [routerLink]="['event-details/', event._id]">here</a></small>
             </div>  
