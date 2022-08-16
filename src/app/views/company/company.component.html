@@ -24,8 +24,8 @@
     <tbody>
       <tr *ngFor="let company of listCompanies | companyFilter: searchCompany; let i=index">
         <td scope="row">{{i+1}}</td>
-        <td>{{company.companyName}}</td>
-        <td>{{company.companyDescription}}</td>
+        <td>{{company.companyName | titlecase}}</td>
+        <td>{{company.companyDescription | titlecase}}</td>
         <td>{{company.email}}</td>
         <td>{{company.role}}</td>
         <td><img [src]="company.photo" width="50px"></td>

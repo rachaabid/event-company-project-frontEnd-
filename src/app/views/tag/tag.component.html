@@ -21,8 +21,8 @@
     <tbody>
       <tr *ngFor="let tag of listTags | tagFilter: searchTag; let i=index">
         <td>{{i+1}}</td>
-        <td>{{tag.title}}</td>
-        <td>{{tag.description}}</td>
+        <td>{{tag.title | titlecase}}</td>
+        <td>{{tag.description | titlecase}}</td>
 
         <td>
           <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalUpd"

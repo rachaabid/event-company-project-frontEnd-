@@ -25,10 +25,10 @@
     <tbody>
       <tr *ngFor="let event of listEvents | eventFilter: searchEvent; let i=index">
         <td>{{i+1}}</td>
-        <td>{{event.eventName}}</td>
+        <td>{{event.eventName | titlecase}}</td>
         <td>{{event.startDate}}</td>
         <td>{{event.startTime}}</td>
-        <td>{{event.location}}</td>
+        <td>{{event.location | titlecase}}</td>
         <td><img [src]="event.photo" width="50px"></td>
         <td>
           <span *ngIf="event.eventType == 'free'" class="badge bg-primary">
