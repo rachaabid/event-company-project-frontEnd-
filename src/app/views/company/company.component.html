@@ -9,43 +9,43 @@
         [(ngModel)]="searchCompany">
   </div>
   
-   <table class="table table-hover table-bordered">
-    <thead class="table-success">
-      <tr>
-        <th class="col-1">No</th>
-        <th scope="col">Company Name</th>
-        <th scope="col">Description</th>
-        <th scope="col">Email</th>
-        <th scope="col">Role</th>
-        <th scope="col">Photo</th>
-        <th class="col-2">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let company of listCompanies | companyFilter: searchCompany; let i=index">
-        <td scope="row">{{i+1}}</td>
-        <td>{{company.companyName | titlecase}}</td>
-        <td>{{company.companyDescription | titlecase}}</td>
-        <td>{{company.email}}</td>
-        <td>{{company.role}}</td>
-        <td><img [src]="company.photo" width="50px"></td>
-        <td>
-          <button type="button" class="btn btn-success" *ngIf="companyConnectedId == company._id && companyConnectedRole == 'Admin'" data-bs-toggle="modal" data-bs-target="#ModalUpd"
-            (click)="showCompanyData(company._id)"><span><i class="fa fa-edit text-white"></i></span></button>
-
-            <button type="button" class="btn btn-success" *ngIf="companyConnectedRole == 'Super_Admin'" data-bs-toggle="modal" data-bs-target="#ModalUpd"
-        (click)="showCompanyData(company._id)"><span><i class="fa fa-edit text-white"></i></span></button>
-
-          <button type="button" class="btn btn-danger" *ngIf="companyConnectedId !== company._id && companyConnectedRole == 'Super_Admin'" (click)="deleteCompany(company._id)"><span><i
-                class="fa fa-trash-alt text-white"></i></span></button>
-
-
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
+  <div style="overflow-x:auto; overflow-y:auto;">
+    <table class="table table-hover table-bordered col-sm-12">
+     <thead class="table-success">
+       <tr>
+         <th class="col-1">No</th>
+         <th scope="col">Company Name</th>
+         <th scope="col">Description</th>
+         <th scope="col">Email</th>
+         <th scope="col">Role</th>
+         <th scope="col">Photo</th>
+         <th class="col-2">Actions</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let company of listCompanies | companyFilter: searchCompany; let i=index">
+         <td scope="row">{{i+1}}</td>
+         <td>{{company.companyName | titlecase}}</td>
+         <td>{{company.companyDescription | titlecase}}</td>
+         <td>{{company.email}}</td>
+         <td>{{company.role}}</td>
+         <td><img [src]="company.photo" width="50px"></td>
+         <td>
+           <button type="button" class="btn btn-success" *ngIf="companyConnectedId == company._id && companyConnectedRole == 'Admin'" data-bs-toggle="modal" data-bs-target="#ModalUpd"
+             (click)="showCompanyData(company._id)"><span><i class="fa fa-edit text-white"></i></span></button>
  
+             <button type="button" class="btn btn-success" *ngIf="companyConnectedRole == 'Super_Admin'" data-bs-toggle="modal" data-bs-target="#ModalUpd"
+         (click)="showCompanyData(company._id)"><span><i class="fa fa-edit text-white"></i></span></button>
+ 
+           <button type="button" class="btn btn-danger" *ngIf="companyConnectedId !== company._id && companyConnectedRole == 'Super_Admin'" (click)="deleteCompany(company._id)"><span><i
+                 class="fa fa-trash-alt text-white"></i></span></button>
+ 
+ 
+         </td>
+       </tr>
+     </tbody>
+   </table>
+  </div>
 
   <div class="modal" id="ModalAdd">
     <div class="modal-dialog">
